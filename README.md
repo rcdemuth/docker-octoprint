@@ -4,6 +4,9 @@
 
 This is a Dockerfile to set up [OctoPrint](http://octoprint.org/). It supports the following architectures automatically:
 
+Most of the coding was done by nunofgs, but I've modified the code to use python 3
+
+
 - x86
 - arm32v6 [<sup>1</sup>](#armv6-docker-bug)
 - arm32v7
