@@ -21,16 +21,16 @@ stages:
     if: tag IS present OR branch = master
 
 script:
-  - echo "$DOCKER_PASSWORD" | docker login -u nunofgs --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u rcdemuth --password-stdin
   - docker run --privileged linuxkit/binfmt:v0.7
   - docker buildx create --use
   - docker buildx build
     --platform $PLATFORMS
     --build-arg "VERSION=$TRAVIS_BRANCH"
     --file "$VARIANT/Dockerfile"
-    --tag nunofgs/octoprint:$TRAVIS_BRANCH-$VARIANT
-    `if [ -n "$TRAVIS_TAG" ]; then echo "--tag nunofgs/octoprint:$VARIANT"; fi`
-    `if [ -n "$TRAVIS_TAG" ] && [ "$VARIANT" = "debian" ]; then echo "--tag nunofgs/octoprint:latest"; fi`
-    `if [ "$VARIANT" = "debian" ]; then echo "--tag nunofgs/octoprint:$TRAVIS_BRANCH"; fi`
+    --tag rcdemuth/octoprint:$TRAVIS_BRANCH-$VARIANT
+    `if [ -n "$TRAVIS_TAG" ]; then echo "--tag rcdemuth/octoprint:$VARIANT"; fi`
+    `if [ -n "$TRAVIS_TAG" ] && [ "$VARIANT" = "debian" ]; then echo "--tag rcdemuth/octoprint:latest"; fi`
+    `if [ "$VARIANT" = "debian" ]; then echo "--tag rcdemuth/octoprint:$TRAVIS_BRANCH"; fi`
     --push
     .
