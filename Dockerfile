@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN [[ "${TARGETPLATFORM:6}" != "arm64" ]] && apt-get install -y libraspberrypi-dev || true
 
 # Download packages
-RUN wget -qO- https://github.com/foosel/OctoPrint/archive/${VERSION}.tar.gz | tar xz
+RUN wget -qO- https://github.com/foosel/OctoPrint/archive/master.tar.gz | tar xz
 RUN wget -qO- https://github.com/jacksonliam/mjpg-streamer/archive/master.tar.gz | tar xz
 
 # Install mjpg-streamer
@@ -39,7 +39,7 @@ RUN make
 RUN make install
 
 # Install OctoPrint
-WORKDIR /OctoPrint-${VERSION}
+WORKDIR /OctoPrint
 RUN pip install -r requirements.txt
 RUN python setup.py install
 RUN ln -s ~/.octoprint /data
